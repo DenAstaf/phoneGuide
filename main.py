@@ -1,6 +1,6 @@
 import json
 import re
-
+print("yi")
 
 def open_contact():
     """Функция показа контактов в справочнике"""
