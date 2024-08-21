@@ -117,16 +117,17 @@ def change_contact():
     """Функция изменения контактов в справочнике"""
     # 1. Показывает все контакты
     with open('Guide.json', 'r', encoding='utf-8') as file:
-        obj_json = json.load(file)
+        obj_json = json.load(file)  # Десерилизует из файла json в объект)
         if len(obj_json["Contacts"]) > 0:
             print("Контакты:")
             for elem_contact in obj_json["Contacts"]:
                 print(f"id: {elem_contact['id']},"
                       f" Имя: {elem_contact['name']},"
                       f" Номер: {elem_contact['phone']},"
-                      f" Комментарий: {elem_contact['comment']}")  # Десерилизует из файла json в объект)
+                      f" Комментарий: {elem_contact['comment']}")
         else:
             print("Справочник пустой")
+            return exit_from_guide()
 
     # 2. Запрашивает id контакта, который надо изменить
     remove_contact = input("\nВведите id контакта, который вы хотите изменить: ")
@@ -196,12 +197,16 @@ def del_contact():
     # 1. Показывает все контакты
     with open('Guide.json', 'r', encoding='utf-8') as file:
         obj_json = json.load(file)  # Десерилизует из файла json в объект
-        print("Контакты:")
-        for elem_contact in obj_json["Contacts"]:
-            print(f"id: {elem_contact['id']},"
-                  f" Имя: {elem_contact['name']},"
-                  f" Номер: {elem_contact['phone']},"
-                  f" Комментарий: {elem_contact['comment']}")
+        if len(obj_json["Contacts"]) > 0:
+            print("Контакты:")
+            for elem_contact in obj_json["Contacts"]:
+                print(f"id: {elem_contact['id']},"
+                      f" Имя: {elem_contact['name']},"
+                      f" Номер: {elem_contact['phone']},"
+                      f" Комментарий: {elem_contact['comment']}")
+        else:
+            print("Справочник пустой")
+            return exit_from_guide()
 
         # 2. Запрашивает id контакта, который надо удалить
         remove_contact = input("\nВведите id контакта, который вы хотите удалить (0 - отменить удаление): ")
